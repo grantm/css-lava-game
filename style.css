@@ -1,0 +1,86 @@
+
+body {
+  counter-reset: score;
+}
+
+#container {
+  position: relative;
+}
+
+.cell {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  margin: 4px;
+  background-color: #99c;
+  border: 4px solid #448;
+  border-radius: 8px;
+}
+
+#container #overlay {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 52px;
+  width: 248px;
+  height: 54px;
+  background-color: #cc000044;
+  border: 1px dotted #eee;
+}
+
+#container #overlay:hover {
+  background-color: #cc000099;
+}
+
+.cell:target {
+  background-color: #d77;
+  border-color: #822;
+}
+
+.cell:hover {
+  background-color: #ff4;
+  border-color: #991;
+  z-index: 4;
+}
+
+.cell {
+  counter-increment: score;
+}
+
+.cell:hover ~ .cell {
+  background-color: red;
+  counter-increment: score 0;
+}
+
+.cell:hover +.cell {
+  background-color: #4f4;
+  border-color: #191;
+  z-index: 3;
+}
+
+.cell::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  opacity: 0;
+  width: 0;
+  height: 4px;
+  z-index: 4;
+  background-color: #ff4;
+  border: 4px solid #ff4;
+  border-radius: 6px;
+  transition: width 0.9s;
+}
+
+.cell:hover::before {
+  opacity: 1;
+  width: 56px;
+}
+
+#score::after {
+  content: counter(score);
+}
