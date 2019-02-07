@@ -1,86 +1,238 @@
 
 body {
   counter-reset: score;
+  font-family: sans-serif;
 }
 
 #container {
   position: relative;
+  padding: 6px;
 }
 
-.cell {
+#start {
+  width: 130px;
+  height: 60px;
+}
+
+#matrix {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(6, 60px);
+  grid-template-rows: repeat(7, 60px) 0 0 0;
+  grid-gap: 10px;
+  gap: 10px;
+}
+
+.tile {
   display: inline-block;
   position: relative;
-  z-index: 1;
-  width: 40px;
-  height: 40px;
-  margin: 4px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
   background-color: #99c;
   border: 4px solid #448;
   border-radius: 8px;
+  z-index: 1;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 50px;
+  text-decoration: none;
+  color: transparent;
 }
 
-#container #overlay {
+#start .tile, #finish, .debug #matrix .tile {
+  color: #000;
+}
+
+#overlay {
   position: absolute;
   z-index: 2;
-  top: 0;
-  left: 52px;
-  width: 248px;
-  height: 54px;
-  background-color: #cc000044;
+  top: 70px;
+  left: 0;
+  width: 420px;
+  height: 422px;
+  background-color: #f80;
   border: 1px dotted #eee;
+  border-radius: 10px;
 }
 
-#container #overlay:hover {
-  background-color: #cc000099;
+#overlay:hover {
+  background-color: #f30;
 }
 
-.cell:target {
-  background-color: #d77;
-  border-color: #822;
+.debug #overlay {
+  display: none;
 }
 
-.cell:hover {
+#start:target:hover .tile,
+.tile:target:hover {
   background-color: #ff4;
   border-color: #991;
   z-index: 4;
 }
 
-.cell {
-  counter-increment: score;
-}
-
-.cell:hover ~ .cell {
-  background-color: red;
-  counter-increment: score 0;
-}
-
-.cell:hover +.cell {
+#start:target .tile:hover,
+.tile:target:hover {
   background-color: #4f4;
   border-color: #191;
+}
+
+#start:target:hover + div > .tile:first-child,
+.tile:target:hover + .tile {
+  background-color: #ff4;
+  border-color: #991;
+  opacity: 0.7;
   z-index: 3;
 }
 
-.cell::before {
+#start:target + div > .tile:first-child:hover,
+.tile:target + .tile:hover {
+  background-color: #ff4;
+  border-color: #991;
+  z-index: 3;
+}
+
+.tile::before {
   content: '';
   display: block;
   position: absolute;
-  top: 14px;
-  left: 20px;
   opacity: 0;
   width: 0;
   height: 4px;
   z-index: 4;
-  background-color: #ff4;
-  border: 4px solid #ff4;
+  background-color: #4f4;
+  border: 4px solid #4f4;
   border-radius: 6px;
-  transition: width 0.9s;
+  transition: width 0.6s;
+  transform-origin: 0px 0px;
 }
 
-.cell:hover::before {
-  opacity: 1;
-  width: 56px;
+.debug .tile::before {
+  background-color: #00f;
+  border-color: #00f;
 }
+
+#start:target .tile:hover::before,
+.tile:target:hover::before {
+  opacity: 1;
+  width: 30px;
+}
+
+.b-tln:hover::before {
+  top: 10px;
+  left: 20px;
+  transform: rotate(270deg);
+}
+
+.b-trn:hover::before {
+  top: 10px;
+  left: calc(100% - 30px);
+  transform: rotate(270deg);
+}
+
+.b-tre:hover::before {
+  top: 20px;
+  left: calc(100% - 10px);
+}
+
+.b-bre:hover::before {
+  top: calc(100% - 30px);
+  left: calc(100% - 10px);
+}
+
+.b-brs:hover::before {
+  top: calc(100% - 10px);
+  left: calc(100% - 20px);
+  transform: rotate(90deg);
+}
+
+.b-bls:hover::before {
+  top: calc(100% - 10px);
+  left: 30px;
+  transform: rotate(90deg);
+}
+
+.b-blw:hover::before {
+  top: calc(100% - 20px);
+  left: 10px;
+  transform: rotate(180deg);
+}
+
+.b-tlw:hover::before {
+  top: 30px;
+  left: 10px;
+  transform: rotate(180deg);
+}
+
+.tile.l2:hover::before {
+  width: 100px;
+}
+
+.tile.l3:hover::before {
+  width: 170px;
+}
+
+.tile.l5:hover::before {
+  width: 310px;
+}
+
+#finish { grid-area: 7 / 5 / 8 / 7; }
+#finish::before { display: none; }
+
+/* targeted moves */
+
+#c03:target        { grid-area: 1 / 3 / 2 / 6; }
+#c04:target        { grid-area: 1 / 3 / 3 / 7; }
+#c05:target        { grid-area: 2 / 2 / 6 / 3; }
+#c05:target ~ #c06 { grid-area: 5 / 3 / 6 / 4; }
+#c06:target        { grid-area: 4 / 3 / 6 / 3; }
+#c06:target ~ #c07 { grid-area: 4 / 4 / 5 / 5; }
+#c07:target        { grid-area: 3 / 4 / 5 / 5; }
+#c07:target ~ #c08 { grid-area: 3 / 5 / 4 / 6; }
+#c08:target        { grid-area: 2 / 5 / 4 / 6; }
+#c08:target ~ #c09 { grid-area: 2 / 4 / 3 / 5; }
+#c09:target        { grid-area: 2 / 3 / 3 / 5; }
+#c09:target ~ #c10 { grid-area: 2 / 2 / 3 / 3; }
+#c10:target        { grid-area: 2 / 2 / 3 / 5; }
+#c10:target ~ #c11 { grid-area: 2 / 5 / 3 / 6; }
+#c12:target        { grid-area: 2 / 6 / 6 / 7; }
+#c12:target ~ #c13 { grid-area: 5 / 5 / 6 / 6; }
+#c13:target        { grid-area: 5 / 1 / 6 / 6; }
+#c13:target ~ #c14 { grid-area: 4 / 1 / 5 / 2; }
+#c14:target        { grid-area: 2 / 1 / 5 / 2; }
+#c14:target ~ #c15 { grid-area: 2 / 2 / 3 / 3; }
+#c15:target        { grid-area: 2 / 2 / 3 / 3; }
+#c15:target ~ #c16 { grid-area: 3 / 2 / 4 / 3; }
+#c16:target        { grid-area: 3 / 2 / 5 / 4; }
+#c16:target ~ #c17 { grid-area: 4 / 1 / 5 / 2; }
+#c17:target        { grid-area: 2 / 1 / 5 / 4; }
+#c17:target ~ #c18 { grid-area: 2 / 4 / 3 / 5; }
+#c18:target        { grid-area: 2 / 1 / 6 / 5; }
+#c18:target ~ #c19 { grid-area: 6 / 1 / 7 / 2; }
+#c19:target        { grid-area: 6 / 1 / 7 / 7; }
+#c19:target ~ #c20 { grid-area: 5 / 6 / 6 / 7; }
+#c20:target        { grid-area: 2 / 6 / 6 / 7; }
+#c20:target ~ #c21 { grid-area: 2 / 5 / 3 / 6; }
+#c21:target        { grid-area: 2 / 4 / 3 / 6; }
+#c21:target ~ #c22 { grid-area: 3 / 4 / 4 / 5; }
+#c22:target        { grid-area: 3 / 4 / 4 / 5; }
+#c22:target ~ #c23 { grid-area: 4 / 4 / 5 / 5; }
+#c23:target        { grid-area: 4 / 4 / 5 / 6; }
+#c23:target ~ #c24 { grid-area: 3 / 5 / 4 / 6; }
+#c24:target        { grid-area: 2 / 5 / 4 / 6; }
+#c24:target ~ #c25 { grid-area: 2 / 4 / 3 / 5; }
+#c25:target        { grid-area: 2 / 4 / 3 / 5; }
+#c25:target ~ #c26 { grid-area: 2 / 2 / 3 / 3; }
+#c26:target        { grid-area: 2 / 2 / 3 / 3; }
+#c26:target ~ #c27 { grid-area: 2 / 1 / 3 / 2; }
+#c27:target        { grid-area: 2 / 1 / 3 / 2; }
+#c27:target ~ #c28 { grid-area: 5 / 1 / 6 / 2; }
+#c28:target        { grid-area: 5 / 1 / 6 / 2; }
+#c28:target ~ #c29 { grid-area: 5 / 6 / 6 / 7; }
+#c29:target        { grid-area: 5 / 6 / 6 / 7; }
 
 #score::after {
   content: counter(score);
 }
+
