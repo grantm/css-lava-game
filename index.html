@@ -5,11 +5,11 @@
   <title>CSS maze 'Game'</title>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body class="nodebug">
+<body class="debug">
 
   <div id="container">
-    <div id="start"><a class="tile b-bls" href="#start">START</a></div>
     <div id="matrix">
+      <a id="start" class="tile b-bls" href="#start">START</a>
       <a id="c01" class="tile b-tre" href="#c01" title="Click to activate">01</a>
       <a id="c02" class="tile b-tre" href="#c02">02</a>
       <a id="c03" class="tile b-tre" href="#c03">03</a>
@@ -40,6 +40,8 @@
       <a id="c28" class="tile b-tre l5" href="#c28">28</a>
       <a id="c29" class="tile b-bls l2" href="#c29">29</a>
       <a id="finish" class="tile" href="#finish">FINISH</a>
+      <div id="filler1"></div>
+      <div id="filler2"></div>
     </div>
     <div id="overlay"></div>
   </div>
