@@ -5,8 +5,10 @@ body {
 }
 
 #container {
+  width: 410px;
   position: relative;
   padding: 6px;
+  margin: 0 auto;
 }
 
 #matrix {
@@ -23,8 +25,13 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
+  background-image: url(rock.jpg);
   background-color: #99c;
   border: 4px solid #448;
+  border-left-color: #ffffff44;
+  border-top-color: #ffffff44;
+  border-right-color: #00000066;
+  border-bottom-color: #00000088;
   border-radius: 8px;
   z-index: 1;
   font-size: 22px;
@@ -38,7 +45,7 @@ body {
 #start,
 #finish,
 .debug #matrix .tile {
-  color: #000;
+  color: #ffffff99;
 }
 
 #overlay {
@@ -48,7 +55,7 @@ body {
   left: 0;
   width: 420px;
   height: 422px;
-  background-color: #f80;
+  background-image: url(lava.gif);
   border: 1px dotted #eee;
   border-radius: 10px;
 }
@@ -62,22 +69,35 @@ body {
 }
 
 .tile:target:hover {
+  z-index: 4;
+  cursor: default;
+}
+
+.debug .tile:target:hover {
   background-color: #4f4;
   border-color: #191;
   z-index: 4;
+  cursor: default;
 }
 
 .tile:target:hover + .tile {
   background-color: #ff4;
-  border-color: #991;
   opacity: 0.7;
   z-index: 3;
 }
 
+.debug .tile:target:hover + .tile {
+  border-color: #991;
+}
+
 .tile:target + .tile:hover {
   background-color: #ff4;
-  border-color: #991;
+  opacity: 0.85;
   z-index: 3;
+}
+
+.debug .tile:target + .tile:hover {
+  border-color: #991;
 }
 
 .tile::before {
@@ -88,16 +108,11 @@ body {
   width: 0;
   height: 4px;
   z-index: 4;
-  background-color: #4f4;
-  border: 4px solid #4f4;
+  background-image: url(bridge.png);
+  border: 4px solid transparent;
   border-radius: 6px;
   transition: width 0.6s;
   transform-origin: 0px 0px;
-}
-
-.debug .tile::before {
-  background-color: #00f;
-  border-color: #00f;
 }
 
 .tile:target:hover::before {
@@ -164,64 +179,149 @@ body {
 }
 
 #start   { grid-area: 1 / 1 / 2 / 3; }
-#filler1 { grid-area: 1 / 3 / 2 / 7; }
+#score   { grid-area: 1 / 3 / 2 / 7; }
 #filler2 { grid-area: 8 / 1 / 9 / 5; }
 #finish  { grid-area: 8 / 5 / 9 / 7; }
-#finish::before { display: none; }
+#finish, #finish::before { display: none; }
+.tile:target + #finish, #finish:target { display: block; }
+#finish:target { color: #00ff00cc; }
 
 /* targeted moves */
 
-#c03:target        { grid-area: 2 / 3 / 3 / 6; }
-#c04:target        { grid-area: 2 / 3 / 4 / 7; }
-#c05:target        { grid-area: 3 / 2 / 7 / 3; }
+#c02:target        { grid-area: 2 / 2 / 3 / 4; }
+#c02:target ~ #c03 { grid-area: 2 / 4 / 3 / 5; }
+#c03:target        { grid-area: 2 / 4 / 3 / 7; }
+#c03:target ~ #c04 { grid-area: 3 / 6 / 4 / 7; }
+#c04:target        { grid-area: 3 / 5 / 5 / 7; }
+#c04:target ~ #c05 { grid-area: 5 / 5 / 6 / 6; }
+#c05:target        { grid-area: 5 / 4 / 7 / 6; }
 #c05:target ~ #c06 { grid-area: 6 / 3 / 7 / 4; }
-#c06:target        { grid-area: 5 / 3 / 7 / 3; }
-#c06:target ~ #c07 { grid-area: 5 / 4 / 6 / 5; }
-#c07:target        { grid-area: 4 / 4 / 6 / 5; }
-#c07:target ~ #c08 { grid-area: 4 / 5 / 5 / 6; }
-#c08:target        { grid-area: 3 / 5 / 5 / 6; }
+#c06:target        { grid-area: 6 / 1 / 7 / 4; }
+#c06:target ~ #c07 { grid-area: 5 / 1 / 6 / 2; }
+#c07:target        { grid-area: 4 / 1 / 6 / 3; }
+#c07:target ~ #c08 { grid-area: 4 / 3 / 5 / 4; }
+#c08:target        { grid-area: 3 / 1 / 5 / 4; }
 #c08:target ~ #c09 { grid-area: 3 / 4 / 4 / 5; }
-#c09:target        { grid-area: 3 / 3 / 4 / 5; }
+#c09:target        { grid-area: 3 / 4 / 4 / 5; }
 #c09:target ~ #c10 { grid-area: 3 / 2 / 4 / 3; }
-#c10:target        { grid-area: 3 / 2 / 4 / 5; }
-#c10:target ~ #c11 { grid-area: 3 / 5 / 4 / 6; }
-#c12:target        { grid-area: 3 / 6 / 7 / 7; }
-#c12:target ~ #c13 { grid-area: 6 / 5 / 7 / 6; }
-#c13:target        { grid-area: 6 / 1 / 7 / 6; }
-#c13:target ~ #c14 { grid-area: 5 / 1 / 6 / 2; }
-#c14:target        { grid-area: 3 / 1 / 6 / 2; }
-#c14:target ~ #c15 { grid-area: 3 / 2 / 4 / 3; }
-#c15:target        { grid-area: 3 / 2 / 4 / 3; }
+#c10:target        { grid-area: 3 / 1 / 4 / 3; }
+#c10:target ~ #c11 { grid-area: 6 / 1 / 7 / 2; }
+#c11:target        { grid-area: 5 / 1 / 7 / 3; }
+#c11:target ~ #c12 { grid-area: 5 / 3 / 6 / 4; }
+#c12:target        { grid-area: 4 / 3 / 6 / 6; }
+#c12:target ~ #c13 { grid-area: 4 / 6 / 5 / 7; }
+#c13:target        { grid-area: 4 / 1 / 5 / 7; }
+#c13:target ~ #c14 { grid-area: 6 / 1 / 7 / 2; }
+#c14:target        { grid-area: 6 / 1 / 7 / 2; }
+#c14:target ~ #c15 { grid-area: 6 / 6 / 7 / 7; }
+#c15:target        { grid-area: 6 / 6 / 7 / 7; }
 #c15:target ~ #c16 { grid-area: 4 / 2 / 5 / 3; }
-#c16:target        { grid-area: 4 / 2 / 6 / 4; }
-#c16:target ~ #c17 { grid-area: 5 / 1 / 6 / 2; }
-#c17:target        { grid-area: 3 / 1 / 6 / 4; }
-#c17:target ~ #c18 { grid-area: 3 / 4 / 4 / 5; }
-#c18:target        { grid-area: 3 / 1 / 7 / 5; }
-#c18:target ~ #c19 { grid-area: 7 / 1 / 8 / 2; }
-#c19:target        { grid-area: 7 / 1 / 8 / 7; }
-#c19:target ~ #c20 { grid-area: 6 / 6 / 7 / 7; }
-#c20:target        { grid-area: 3 / 6 / 7 / 7; }
-#c20:target ~ #c21 { grid-area: 3 / 5 / 4 / 6; }
-#c21:target        { grid-area: 3 / 4 / 4 / 6; }
-#c21:target ~ #c22 { grid-area: 4 / 4 / 5 / 5; }
-#c22:target        { grid-area: 4 / 4 / 5 / 5; }
-#c22:target ~ #c23 { grid-area: 5 / 4 / 6 / 5; }
-#c23:target        { grid-area: 5 / 4 / 6 / 6; }
-#c23:target ~ #c24 { grid-area: 4 / 5 / 5 / 6; }
-#c24:target        { grid-area: 3 / 5 / 5 / 6; }
-#c24:target ~ #c25 { grid-area: 3 / 4 / 4 / 5; }
-#c25:target        { grid-area: 3 / 4 / 4 / 5; }
-#c25:target ~ #c26 { grid-area: 3 / 2 / 4 / 3; }
-#c26:target        { grid-area: 3 / 2 / 4 / 3; }
-#c26:target ~ #c27 { grid-area: 3 / 1 / 4 / 2; }
-#c27:target        { grid-area: 3 / 1 / 4 / 2; }
-#c27:target ~ #c28 { grid-area: 6 / 1 / 7 / 2; }
-#c28:target        { grid-area: 6 / 1 / 7 / 2; }
-#c28:target ~ #c29 { grid-area: 6 / 6 / 7 / 7; }
-#c29:target        { grid-area: 6 / 6 / 7 / 7; }
 
-#score::after {
+.tile .token {
+  display: block;
+  opacity: 0.5;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding:2px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.tile:target:hover .token {
+  width: 24px;
+  height: 20px;
+  border-radius: 12px;
+  cursor: default;
+  opacity: 0.5;
+}
+
+.tile:target .token:hover {
+  opacity: 1;
+}
+
+.token input {
+  position: absolute;
+  left: -20px;
+  outline: none;
+}
+
+.token span::before {
+  display: block;
+  content: '';
+  width: 24px;
+  height: 20px;
+  background-color: #ffffff33;
+  background-image: url(diamond.png);
+  background-repeat: none;
+  border-radius: 50%;
+  cursor: grab;
+}
+
+.token input:checked + span::before {
+  display: none;
+}
+
+#tok1 { top: 50px; left: 48px; }
+#tok2 { bottom: 4px; right: 4px; }
+#tok3 { top: 48px; left: 30px; }
+#tok4 { top: 4px; left: 4px; }
+#tok5 { top: 4px; left: 48px; }
+
+.token input:checked {
+  counter-increment: score;
+}
+
+.mask {
+  display: none;
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background-image: url(mist.gif), url(mist2.gif);
+  cursor: none;
+  opacity: 0.25;
+}
+
+.tile:target .mask {
+  display: block;
+}
+
+#score {
+  color: #222;
+  font-size: 32px;
+  font-weight: bold;
+  text-align: right;
+  padding: 8px;
+}
+
+#score span::after {
+  display: inline-block;
+  width: 1.2em;
+  padding: 4px;
   content: counter(score);
 }
+
+#start { counter-reset: score 16; }
+a:target ~ a { counter-increment: score -1; }
+
+#start:not(:target)
++a:not(:target)
++a:not(:target)
++a:not(:target)
++a:not(:target)
++a:not(:target)
++a:not(:target)
++a:not(:target)
++a:not(:target)
++a:not(:target)
++a:not(:target)
++a:not(:target)
++a:not(:target)
++a:not(:target)
++a:not(:target)
++a:not(:target)
++#finish:not(:target)
+{ counter-reset: score 0;}
 

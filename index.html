@@ -2,52 +2,50 @@
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <title>CSS maze 'Game'</title>
+  <title>CSS 'Game' - The Floor is Lava!</title>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body class="debug">
+<body class="nodebug">
 
+  <form action="#start" method="GET">
   <div id="container">
     <div id="matrix">
       <a id="start" class="tile b-bls" href="#start">START</a>
       <a id="c01" class="tile b-tre" href="#c01" title="Click to activate">01</a>
       <a id="c02" class="tile b-tre" href="#c02">02</a>
-      <a id="c03" class="tile b-tre" href="#c03">03</a>
-      <a id="c04" class="tile b-blw" href="#c04">04</a>
-      <a id="c05" class="tile b-bre" href="#c05">05</a>
-      <a id="c06" class="tile b-tre" href="#c06">06</a>
-      <a id="c07" class="tile b-tre" href="#c07">07</a>
-      <a id="c08" class="tile b-tlw" href="#c08">08</a>
-      <a id="c09" class="tile b-tlw" href="#c09">09</a>
-      <a id="c10" class="tile b-tre" href="#c10">10</a>
-      <a id="c11" class="tile b-tre" href="#c11">11</a>
-      <a id="c12" class="tile b-blw" href="#c12">12</a>
-      <a id="c13" class="tile b-tln" href="#c13">13</a>
-      <a id="c14" class="tile b-tre" href="#c14">14</a>
-      <a id="c15" class="tile b-bls" href="#c15">15</a>
-      <a id="c16" class="tile b-blw" href="#c16">16</a>
-      <a id="c17" class="tile b-tre" href="#c17">17</a>
-      <a id="c18" class="tile b-bls" href="#c18">18</a>
-      <a id="c19" class="tile b-trn" href="#c19">19</a>
-      <a id="c20" class="tile b-tlw" href="#c20">20</a>
-      <a id="c21" class="tile b-bls" href="#c21">21</a>
-      <a id="c22" class="tile b-brs" href="#c22">22</a>
-      <a id="c23" class="tile b-trn" href="#c23">23</a>
-      <a id="c24" class="tile b-tlw" href="#c24">24</a>
-      <a id="c25" class="tile b-tlw l2" href="#c25">25</a>
-      <a id="c26" class="tile b-tlw" href="#c26">26</a>
-      <a id="c27" class="tile b-bls l3" href="#c27">27</a>
-      <a id="c28" class="tile b-tre l5" href="#c28">28</a>
-      <a id="c29" class="tile b-bls l2" href="#c29">29</a>
+      <a id="c03" class="tile b-brs" href="#c03">03</a>
+      <a id="c04" class="tile b-bls" href="#c04">04</a>
+      <a id="c05" class="tile b-blw" href="#c05">05
+        <label id="tok1" class="token"><input type="checkbox"><span /></label>
+      </a>
+      <a id="c06" class="tile b-tln" href="#c06">06</a>
+      <a id="c07" class="tile b-tre" href="#c07">07
+        <label id="tok2" class="token"><input type="checkbox"><span /></label>
+      </a>
+      <a id="c08" class="tile b-tre" href="#c08">08
+        <label id="tok3" class="token"><input type="checkbox"><span /></label>
+      </a>
+      <a id="c09" class="tile b-tlw l2" href="#c09">09</a>
+      <a id="c10" class="tile b-bls l3" href="#c10">10</a>
+      <a id="c11" class="tile b-tre" href="#c11">11
+        <label id="tok4" class="token"><input type="checkbox"><span /></label>
+      </a>
+      <a id="c12" class="tile b-tre" href="#c12">12
+        <span class="mask"></span>
+        <label id="tok5" class="token"><input type="checkbox"><span /></label>
+      </a>
+      <a id="c13" class="tile b-bls l2" href="#c13">13</a>
+      <a id="c14" class="tile b-tre l5" href="#c14">14</a>
+      <a id="c15" class="tile b-bls l2" href="#c15">15</a>
       <a id="finish" class="tile" href="#finish">FINISH</a>
-      <div id="filler1"></div>
+      <div id="score">
+        Score: <span />
+      </div>
       <div id="filler2"></div>
     </div>
     <div id="overlay"></div>
   </div>
+  </form>
 
-  <!--
-  <div id="score">Score:</div>
-  -->
 </body>
 </html>
