@@ -181,9 +181,9 @@ body {
 #start   { grid-area: 1 / 1 / 2 / 3; }
 #score   { grid-area: 1 / 3 / 2 / 7; }
 #filler2 { grid-area: 8 / 1 / 9 / 5; }
-#finish  { grid-area: 8 / 5 / 9 / 7; }
-#finish, #finish::before { display: none; }
-.tile:target + #finish, #finish:target { display: block; }
+#finish  { grid-area: 7 / 6 / 8 / 7; }
+.tile:target + #finish, #finish:target { grid-area: 8 / 5 / 9 / 7; }
+#finish::before { display: none; }
 #finish:target { color: #00ff00cc; }
 
 /* targeted moves */
