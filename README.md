@@ -2,7 +2,7 @@ This project implements a small browser-based game called "The Floor is Lava!".
 
 The game is built using HTML and CSS, but **no Javascript**.
 
-You can play the game [here](https://grantm.github.io/css-lava-game/).  Working out _how_ to play it is half the fun.
+You can [play the game here](https://grantm.github.io/css-lava-game/).  Working out _how_ to play it is half the fun.
 
 For an explanation of how it works, see this
 [lightning talk](https://www.youtube.com/watch?v=GwRqhJg_va8) recorded at
